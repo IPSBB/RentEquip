@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate='0'>
+		<record id="ir_cron_qbd_inventory_adjustment" model="ir.cron">
+	        <field name="name">ODOO-QBD: Inventory Adjustment</field>
+	        <field name="model_id" ref="model_product_template"/>
+	        <field name="state">code</field>
+	        <field name="code">model.export_updated_inventory_to_qbd()</field>
+	        <field name="user_id" ref="base.user_admin"/>
+	        <field name="interval_number">1</field>
+	        <field name="interval_type">hours</field>
+	        <field name="numbercall">-1</field>
+	        <field name="active" eval="True"/>
+	    </record>
+
+		<record id="ir_cron_odoo_inventory_adjustment" model="ir.cron">
+	        <field name="name">QBD-ODOO: Inventory Adjustment</field>
+	        <field name="model_id" ref="model_product_template"/>
+	        <field name="state">code</field>
+	        <field name="code">model.import_updated_inventory_qbd_to_odoo()</field>
+	        <field name="user_id" ref="base.user_admin"/>
+	        <field name="interval_number">1</field>
+	        <field name="interval_type">hours</field>
+	        <field name="numbercall">-1</field>
+	        <field name="active" eval="True"/>
+	    </record>
+    </data>
+</odoo>

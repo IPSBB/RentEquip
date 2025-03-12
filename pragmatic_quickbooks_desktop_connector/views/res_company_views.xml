@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="qbd_view_company_form">
+        <field name="name">qbo.view.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <!-- Added the Account Field for Configuration  -->
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="account_journal_payment_debit_account_id"/>
+                <field name="account_journal_payment_credit_account_id"/>
+            </xpath>
+
+            <xpath expr="//notebook/page[1]" position="after">
+                <page string="QuickBooks Desktop Configuration">
+                    <separator name="configuration" string="QuickBooks Desktop Configuration"/>
+                    <div>
+                        <span>
+                            <button string='Test Connection' type="object" name="test_qb_connection"
+                                    class="oe_highlight" icon="fa-cogs"/>
+                            <button string='Import Essentials' type="object" name="import_export_essential"
+                                    class="oe_highlight cmpny_btn" icon="fa-cogs"/>
+                            <button string='Check Duplicates' type="object" name="check_duplicates"
+                                    class="oe_highlight cmpny_btn" icon="fa-cogs"/>
+                            <button string='Check Orders and Invoices without Tax Code' type="object" name="check_tax_code_for_order_invoices"
+                                    class="oe_highlight cmpny_btn" icon="fa-cogs"/>
+                            <button string='Clean Quickbooks Id' type="object" name="empty_quickbooks_id"
+                                    class="oe_highlight cmpny_btn" icon="fa-cogs" invisible="1"/>
+                        </span>
+                    </div>
+
+                    <separator name="configuration" string="Export Masters [Note: This button should be used when system is completely setup ]"/>
+                    <div>
+                        <span>
+                            <button string='Export Masters' type="object" name="export_masters"
+                                    class="oe_highlight" icon="fa-cogs"/>
+                        </span>
+                    </div>
+
+                    <notebook>
+                        <!--////////////////////////////  CREDENTIALS PAGE   ////////////////////////////////-->
+                        <page name="credentials" string="Credentials">
+                            <group string="Credentials">
+                                <group name="Credential">
+                                    <field name="url" required="1"/>
+                                </group>
+
+                            </group>
+                        </page>
+
+
+                        <!--/////////////////////////  IMPORT PAGE  /////////////////////////////-->
+
+                        <!--<page name="initial_sync" string='Initial Sync'>-->
+                        <page name="initial_sync" string='Import from QBD'>
+                            <separator name='sync' string='Initial Sync'/>
+                            <group>
+                                <!--<field name="start" required='1' style="width:20%%"/>-->
+                                <!--<field name="limit" required='1' style="width:20%%"/>-->
+                            </group>
+                            <group>
+                                <group>
+                                    <button string="1-Import Accounts" type="object" name="import_accounts"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_accounts" />-->
+                                    <field name="last_imported_qbd_id_for_account"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <button string="2-Import QBD Payment Methods" type="object"
+                                            name="import_payment_methods" class="oe_highlight"
+                                            icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_payment_methods" />-->
+                                </group>
+                            </group>
+
+
+                            <h4 style="color:red">Please make QBD account configuration in QBD Account Configuration
+                                tab
+                            </h4>
+
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="3-Import Partners" type="object" name="import_partner"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_partners" />-->
+                                    <field name="last_imported_qbd_id_for_partners"/>
+                                </group>
+                            </group>
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="4-Import Vendors" type="object" name="import_vendor"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_vendors" />-->
+                                    <field name="last_imported_qbd_id_for_vendors"/>
+                                </group>
+                            </group>
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="5-Import Product" type="object" name="import_product"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_products" />-->
+                                    <field name="last_imported_qbd_id_for_product"/>
+                                </group>
+                            </group>
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="6-Import Orders" type="object" name="import_order"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_orders" />-->
+                                    <field name="last_imported_qbd_id_for_sale_orders"/>
+                                </group>
+                            </group>
+
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="7-Import Invoices" type="object" name="import_invoice"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_invoices"/> &lt;!&ndash; readonly="1" &ndash;&gt;-->
+                                    <field name="last_imported_qbd_id_for_invoice"/>
+                                </group>
+                            </group>
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="Import Invoices Sheet" type="object" name="import_invoice_sheet"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_invoices"/> &lt;!&ndash; readonly="1" &ndash;&gt;-->
+<!--                                    <field name="last_imported_qbd_id_for_invoice"/>-->
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <button string="8-Import Vendor Bills" type="object" name="import_vendor_bills"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="last_imported_qbd_id_for_vendor_bill"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <button string="9-Import Payments" type="object" name="import_payments"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_payments"/>-->
+                                    <field name="last_imported_qbd_id_for_payments"/>
+                                </group>
+                            </group>
+
+                            <group>
+                            	<group>
+                            		<button string="10- Import Vendor Payments" type="object" name="import_vendorbill_payments"
+                            				class="oe_highlight" icon="fa-arrow-circle-down"/>
+                            	</group>
+                            	<group>
+                            		<field name="vendor_payment_journal_id"/>
+                            		<field name="vendor_payment_after_date"/>
+                            	</group>
+                            </group>
+
+                            <group invisible="0">
+                                <group>
+                                    <button string="11-Import Purchase Order" type="object" name="import_purchase_orders"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <!--<field name="last_imported_date_of_purchase_orders"/>-->
+                                    <field name="last_imported_qbd_id_for_purchase_orders"/>
+                                </group>
+                            </group>
+
+
+                        </page>
+                        <page name="QB Account Settings" string=" QBD Account and Taxes Configuration">
+                            <group string="Customer Accounts">
+                                <group name="Customer Accounts">
+                                    <field name="qb_account_recievable"/>
+                                    <field name="qb_account_payable"/>
+                                </group>
+                            </group>
+                            <group string="Product Accounts">
+                                <group name="Product Accounts">
+                                    <field name="qb_income_account"/>
+                                    <field name="qb_expense_account"/>
+                                </group>
+                            </group>
+                            <group string="Asset Account and COGS Account">
+                                <group name="Asset Account and COGS Account">
+                                    <field name="qb_asset_account"/>
+                                    <field name="qb_cogs_account"/>
+                                </group>
+                            </group>
+                            <group string="Default Tax for QBD">
+                                <group name="Default Tax for QBD">
+                                    <field name="qb_default_tax"/>
+                                </group>
+                            </group>
+
+                        </page>
+
+
+                        <!--/////////////////////////  EXPORT PAGE  /////////////////////////////-->
+                        <page name="export_config" string='Data Configuration'>
+                            <group>
+                                <separator name="import_limit" string="Import"/>
+                                <!--<field name="import_limit" class="inline"/>-->
+                                <field name="import_acc_limit" class="inline"/>
+                                <field name="import_cus_limit" class="inline"/>
+                                <field name="import_ven_limit" class="inline"/>
+                                <field name="import_pro_limit" class="inline"/>
+                                <field name="import_so_limit" class="inline"/>
+                                <field name="import_inv_limit" class="inline"/>
+                                <field name="import_vendor_bill_limit" class="inline"/>
+                                <field name="import_pay_limit" class="inline"/>
+                                <field name="import_vendor_pay_limit" class="inline"/>
+                                <field name="import_po_limit" class="inline"/>
+
+                                <separator name="export_limit" string="Export"/>
+                                <!--<field name="limit" class="inline"/>-->
+                                <field name="export_updated_record"/>
+                                <field name="export_acc_limit" class="inline"/>
+                                <field name="export_cus_limit" class="inline"/>
+                                <field name="export_ven_limit" class="inline"/>
+                                <field name="export_pro_limit" class="inline"/>
+                                <field name="export_so_limit" class="inline"/>
+                                <field name="export_inv_limit" class="inline"/>
+                                <field name="export_pay_limit" class="inline"/>
+                                <field name="export_po_limit" class="inline"/>
+
+                                <separator name="import_limit" string="Inventory Adjustment"/>
+                                <field name="inventory_adjust_limit"/>
+
+                            </group>
+                        </page>
+
+                        <page name="export_sync" string='Export to QBD'>
+                            <!--<separator name='sync' string='Export'/>-->
+
+                            <group>
+                                <group>
+                                    <button string="1-Export Accounts" type="object" name="export_accounts"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                            </group>
+                            <!--<group>-->
+                            <!--<group>-->
+                            <!--<button string="2-Export QBD Payment Methods" type="object" name="export_qbd_payment_methods" class="oe_highlight" icon="fa-arrow-circle-down"/>-->
+                            <!--</group>-->
+                            <!--</group>-->
+                            <group>
+                                <group>
+                                    <button string="2-Export Partners" type="object" name="export_partners"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <button string="3-Export Vendors" type="object" name="export_vendors"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <button string="4-Export Products" type="object" name="export_products"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <button string="5-Export Orders" type="object" name="export_sale_orders"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_sales_order_date"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <button string="6-Export Invoices" type="object" name="export_invoices"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_invoice_date"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <button string="7-Export Vendor Bills" type="object" name="export_invoices"
+                                            class="oe_highlight" context="{'is_vendor_bill' : True}" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_vendor_bill_date"/>
+                                </group>
+                            </group>
+
+
+                            <group>
+                                <group>
+                                    <button string="8-Export Payments" type="object" name="export_payments"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_payment_date"/>
+                                </group>
+                            </group>
+
+                            <!-- <group>
+                                <group>
+                                    <button string="9-Export Vendor Payments" type="object" name="export_vendor_bill_payment"
+                                            class="oe_highlight" context="{'is_vendor_payment' : True}" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_vendor_payment_date"/>
+                                </group>
+                            </group> -->
+
+                            <group>
+                                <group>
+                                    <button string="9-Export Purchase Order" type="object" name="export_purchase_order"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_purchase_order_date"/>
+                                </group>
+                            </group>
+
+                        </page>
+
+                        <!--<page name="QBD Loger" string="QBD Loger">-->
+                            <!--<field name="qbd_loger_id">-->
+                                <!--<tree>-->
+                                    <!--<field name="operation"/>-->
+                                    <!--<field name="odoo_id"/>-->
+                                    <!--<field name="qbd_id"/>-->
+                                    <!--<field name="message"/>-->
+                                <!--</tree>-->
+                            <!--</field>-->
+                        <!--</page>-->
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="qbd_view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name='partner_id' position="after">
+                    <field name="quickbooks_id" readonly="1"/>
+                    <field name="qbd_sale_order_no" readonly="1"/>
+                    <field name="is_updated"/>
+                </field>
+                <field name="note" position="after">
+                        <field name="qbd_memo" class="oe_inline" placeholder="QBD Memo"/>
+                </field>
+
+                <!-- <field name="tax_id" position="after">
+                    <field name="qbd_tax_code" placeholder="Tax Code" string="QBD Tax Code"
+                           attrs="{'required':[('display_type', '=', False)]}" readonly="1" force_save="1"/>
+                </field> -->
+
+                <!-- <xpath expr="//tree/field[@name='tax_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('display_type', '=', False)]}</attribute>
+                </xpath> -->
+
+                <xpath expr="//tree/field[@name='tax_id']" position="after">
+                    <field name="qbd_tax_code" placeholder="Tax Code" string="QBD Tax Code"
+                        readonly="1" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

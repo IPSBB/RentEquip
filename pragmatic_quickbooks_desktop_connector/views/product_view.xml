@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+      <!--Product template inherited-->
+     <record model="ir.ui.view" id="qbd_product_template_only_form_view">
+        <field name="name">qbd.product.template.only.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]/group[1]/group/field[@name='categ_id']" position="after">
+                <field name="quickbooks_id" readonly="1"/>
+                <field name="qty_updated"/>
+                <field name="is_updated" readonly="0"/>
+                <field name="invent_adjustment_created" readonly="0" invisible ="type in ('consu','service')" />
+            </xpath>
+<!--            <xpath expr="//notebook/page[2]/group[2]" position="inside">-->
+<!--                <field name="description_sale" />-->
+<!--            </xpath>-->
+            <xpath expr="//notebook/page[1]/group[1]/group[2]/label" position="before">
+                <field name="qbd_tax_code" required="1" readonly="0"/>
+                <field name="qbd_product_type" required="0"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product product inherited -->
+     <!--<record model="ir.ui.view" id="qbd_product_normal_form_view">
+        <field name="name">qbd.product.normal.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="quickbooks_id" readonly="1"/>
+                 <field name="is_updated" readonly="0"/>
+            </field>
+            <field name="taxes_id" position="before">
+                <field name="qbd_tax_code" required="1" readonly="0"/>
+            </field>
+        </field>
+    </record>-->
+
+</odoo>

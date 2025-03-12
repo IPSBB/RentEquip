@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="qbd_view_account_account_form">
+            <field name="name">account.account.form</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <field name="deprecated" position="after">
+                    <field name="quickbooks_id" readonly="1"/>
+                    <field name="is_updated"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="qbd_view_account_journal_form">
+            <field name="name">account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="qbd_payment_method_id"/>
+                </field>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="qbd_view_account_payment_form">
+            <field name="name">account.payment.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="quickbooks_id" readonly="1"/>
+                    <field name="qbd_ref_no" />
+                    <field name="is_updated"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="qbd_view_payment_term_form">
+            <field name="name">account.payment.term.form</field>
+            <field name="model">account.payment.term</field>
+            <field name="inherit_id" ref="account.view_payment_term_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="quickbooks_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="qbd_view_tax_form">
+            <field name="name">account.tax.form</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group" position="inside">
+                        <group>
+                            <field name="qbd_tax_code"/>
+                        </group>
+                        <group>
+                            <field name="desc"/>
+                        </group>
+                        <group>
+                            <field name="quickbooks_id" readonly="1"/>
+                        </group>
+                </xpath>
+                <!--<field name="type_tax_use" position="after">-->
+                    <!--<field name="desc"/>-->
+                    <!--<field name="quickbooks_id" readonly="1"/>-->
+                <!--</field>-->
+            </field>
+        </record>
+
+        <record id="view_account_payment_register_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherit</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_bank_id" position="after">
+                    <field name="qbd_ref_no"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

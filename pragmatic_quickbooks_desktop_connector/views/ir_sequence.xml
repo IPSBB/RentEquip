@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="sequence_account_invoice" model="ir.sequence">
+           <field name="name">Account Invoice</field>
+           <field name="code">invoice_sequencing</field>
+           <field name="active">TRUE</field>
+           <field name="prefix">I</field>
+           <field name="padding">9</field>
+           <field name="number_next">1</field>
+           <field name="number_increment">1</field>
+        </record>
+
+        <record id="sequence_payment_customer_invoice_custom" model="ir.sequence">
+            <field name="name">Payments customer invoices sequence</field>
+            <field name="code">account.payment.customer.invoice.custom</field>
+            <field eval="False" name="company_id"/>
+            <field name="active">TRUE</field>
+            <field name="prefix">CIN</field>
+            <field name="padding">8</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+        <record id="sequence_payment_customer_refund_custom" model="ir.sequence">
+            <field name="name">Payments customer credit notes sequence</field>
+            <field name="code">account.payment.customer.refund.custom</field>
+            <field eval="False" name="company_id"/>
+            <field name="active">TRUE</field>
+            <field name="prefix">COUT</field>
+            <field name="padding">8</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+        </record>
+
+        <record id="sequence_payment_supplier_invoice_custom" model="ir.sequence">
+            <field name="name">Payments supplier invoices sequence</field>
+            <field name="code">account.payment.supplier.invoice.custom</field>
+            <field eval="False" name="company_id"/>
+            <field name="active">TRUE</field>
+            <field name="prefix">SOUT</field>
+            <field name="padding">8</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+        </record>
+
+        <record id="sequence_payment_supplier_refund_custom" model="ir.sequence">
+            <field name="name">Payments supplier credit notes sequence</field>
+            <field name="code">account.payment.supplier.refund.custom</field>
+            <field eval="False" name="company_id"/>
+            <field name="active">TRUE</field>
+            <field name="prefix">SIN</field>
+            <field name="padding">8</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+        </record>
+
+        <record id="sequence_payment_transfer_custom" model="ir.sequence">
+            <field name="name">Payments transfer sequence</field>
+            <field name="code">account.payment.transfer.custom</field>
+            <field eval="False" name="company_id"/>
+            <field name="active">TRUE</field>
+            <field name="prefix">TRAN</field>
+            <field name="padding">8</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+        </record>
+
+    </data>
+</odoo>

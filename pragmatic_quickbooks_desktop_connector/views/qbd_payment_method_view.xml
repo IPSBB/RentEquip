@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="qbd_payment_method_form" model="ir.ui.view">
+            <field name="name">qbd.payment.method.form</field>
+            <field name="model">qbd.payment.method</field>
+            <field name="arch" type="xml">
+                <form string="QBD Payment Method" name="QBD Payment Method">
+                    <sheet>
+                        <group >
+                            <field name="name"/>
+                            <field name="quickbooks_id" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_payment_method_tree" model="ir.ui.view">
+            <field name="name">qbd.payment.method.tree</field>
+            <field name="model">qbd.payment.method</field>
+            <field name="arch" type="xml">
+                <tree string="QBD Payment Method" name="QBD Payment Method">
+                    <field name="name"/>
+                    <field name="quickbooks_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_payment_method" model="ir.actions.act_window">
+            <field name="name">QBD Payment Method</field>
+            <field name="res_model">qbd.payment.method</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_qbd_payment_method" name="QBD Payment Method" action="action_qbd_payment_method"
+                  parent="account.account_account_menu" sequence="2" />
+    </data>
+</odoo>

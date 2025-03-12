@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Server Action for importing BOM of the product-->
+        <record model="ir.actions.server" id="product_bom_import_qbd">
+            <field name="name">Import BOM of QBD product</field>
+            <field name="model_id" ref="product.model_product_template" />
+            <field name="binding_model_id" ref="product.model_product_template"/>  
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.product_bom_import_qbd()
+            </field>
+        </record>
+
+        <!-- Export product to QBD -->
+        <record model="ir.actions.server" id="product_export_to_qbd">
+            <field name="name">Export Product to QBD</field>
+            <field name="model_id" ref="product.model_product_template" />
+            <field name="binding_model_id" ref="product.model_product_product"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.export_product_to_qbd_server_action()
+            </field>
+        </record>
+
+         <!-- Export product to QBD -->
+         <record model="ir.actions.server" id="product_uncheck_update_flags">
+            <field name="name">Uncheck Quantity Update Flags</field>
+            <field name="model_id" ref="product.model_product_template" />
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.uncheck_update_flags_server_action()
+            </field>
+        </record>
+
+         <!-- Export product to QBD -->
+         <record model="ir.actions.server" id="product_uncheck_invent_flags">
+            <field name="name">Uncheck Inventory Adjustment Update Flags</field>
+            <field name="model_id" ref="product.model_product_template" />
+            <field name="binding_model_id" ref="product.model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.uncheck_inventory_flags_server_action()
+            </field>
+        </record>
+
+        <!-- Export Sale Order to QBD -->
+        <record model="ir.actions.server" id="order_export_qbd">
+                <field name="name">Export Sale Order to QBD</field>
+                <field name="model_id" ref="sale.model_sale_order" />
+                <field name="binding_model_id" ref="sale.model_sale_order"/>  
+                <field name="state">code</field>
+                <field name="code">
+                    if records:
+                        records.export_sale_order_to_qbd()
+                </field>
+        </record>
+        
+        <!-- Export Invoices to QBD -->
+        <record model="ir.actions.server" id="invoice_export_to_qbd">
+            <field name="name">Export Invoice to QBD</field>
+            <field name="model_id" ref="account.model_account_move" />
+            <field name="binding_model_id" ref="account.model_account_move"/>  
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.export_invoice_to_qbd_server_action()
+            </field>
+        </record>
+
+        <!-- Export PO to QBD -->
+        <record model="ir.actions.server" id="purchase_order_export_to_qbd">
+            <field name="name">Export Purchase Orders to QBD</field>
+            <field name="model_id" ref="purchase.model_purchase_order" />
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>  
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.export_po_to_qbd_server_action()
+            </field>
+        </record>
+
+        <!-- Export Partner to QBD -->
+        <record model="ir.actions.server" id="vendor_export_to_qbd1">
+            <field name="name">Export Partner to QBD</field>
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="binding_model_id" ref="base.model_res_partner"/>  
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.export_partner_to_qbd()
+            </field>
+        </record>
+
+        <!-- Export Account to QBD -->
+        <record model="ir.actions.server" id="account_export_account_to_qbd">
+            <field name="name">Export Account to QBD</field>
+            <field name="model_id" ref="account.model_account_account" />
+            <field name="binding_model_id" ref="account.model_account_account"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.export_account_to_qbd()
+            </field>
+        </record>
+</odoo>

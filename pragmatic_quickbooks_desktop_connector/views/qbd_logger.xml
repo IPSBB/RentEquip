@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="qbd_duplicate_record_form" model="ir.ui.view">
+            <field name="name">qbd.duplicates.logger.form</field>
+            <field name="model">qbd.duplicates.logger</field>
+            <field name="arch" type="xml">
+                <form string="Duplicate Records" name="Duplicate Logger">
+                    <sheet>
+                        <group >
+                            <field name="odoo_id"/>
+                            <field name="parent_dcode"/>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_duplicate_record_tree" model="ir.ui.view">
+            <field name="name">qbd.duplicates.logger.tree</field>
+            <field name="model">qbd.duplicates.logger</field>
+            <field name="arch" type="xml">
+                <tree string="Duplicate Records" name="Duplicate Logger">
+                            <field name="odoo_id"/>
+                            <field name="parent_dcode"/>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_duplicate_record" model="ir.actions.act_window">
+            <field name="name">Duplicate Records</field>
+            <field name="res_model">qbd.duplicates.logger</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="qbd_orderinvoice_record_form" model="ir.ui.view">
+            <field name="name">qbd.orderinvoice.logger.form</field>
+            <field name="model">qbd.orderinvoice.logger</field>
+            <field name="arch" type="xml">
+                <form string="Order Invoice Records" name="Order Invoice Logger">
+                    <sheet>
+                        <group >
+                            <field name="odoo_id"/>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_orderinvoice_record_tree" model="ir.ui.view">
+            <field name="name">qbd.orderinvoice.logger.tree</field>
+            <field name="model">qbd.orderinvoice.logger</field>
+            <field name="arch" type="xml">
+                <tree string="Order Invoice Records" name="Order Invoice Logger">
+                            <field name="odoo_id"/>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_orderinvoice_record" model="ir.actions.act_window">
+            <field name="name">Order Invoice Records</field>
+            <field name="res_model">qbd.orderinvoice.logger</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="qbd_import_export_log_form" model="ir.ui.view">
+            <field name="name">qbd.loger.form</field>
+            <field name="model">qbd.loger</field>
+            <field name="arch" type="xml">
+                <form string="Import Export Logs" name="Import Export Logs">
+                    <sheet>
+                        <group >
+                            <field name="operation"/>
+                            <field name="odoo_id"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_import_export_log_tree" model="ir.ui.view">
+            <field name="name">qbd.loger.tree</field>
+            <field name="model">qbd.loger</field>
+            <field name="arch" type="xml">
+                <tree string="Import Export Logs" name="Import Export Logs">
+                            <field name="operation"/>
+                            <field name="odoo_id"/>
+                            <field name="qbd_id"/>
+                            <field name="message"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_import_export_record" model="ir.actions.act_window">
+            <field name="name">Import Export Log</field>
+            <field name="res_model">qbd.loger</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="qbd_connection_log_form" model="ir.ui.view">
+            <field name="name">qbd.connection.logger.form</field>
+            <field name="model">qbd.connection.logger</field>
+            <field name="arch" type="xml">
+                <form string="Connection Logs / Import Logs" name="Connection Logs / Import Logs">
+                    <sheet>
+                        <group >
+                            <field name="message"/>
+                            <field name="type"/>
+                            <field name="date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_connection_log_tree" model="ir.ui.view">
+            <field name="name">qbd.connection.logger.tree</field>
+            <field name="model">qbd.connection.logger</field>
+            <field name="arch" type="xml">
+                <tree string="Connection Logs / Import Logs" name="Connection Logs / Import Logs">
+                            <field name="message"/>
+                            <field name="type"/>
+                            <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_connection_log" model="ir.actions.act_window">
+            <field name="name">Connection Log / Import Logs</field>
+            <field name="res_model">qbd.connection.logger</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+
+        <record id="qbd_linked_log_tree" model="ir.ui.view">
+            <field name="name">qbd.linked.logger.tree</field>
+            <field name="model">qbd.linked.logger</field>
+            <field name="arch" type="xml">
+                <tree string="Import Logs" name="Import Logs">
+                            <field name="date"/>
+                            <field name="message"/>
+                            <field name="invoice_id"/>
+                            <field name="sale_qbd_id"/>  
+                            <button name="import_specific_order" string="Import" type="object" class="btn-primary"/>        
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_linked_log" model="ir.actions.act_window">
+            <field name="name">Import Logs</field>
+            <field name="res_model">qbd.linked.logger</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="menu_qbd_logger_re" name="QBD Loggers" sequence="1" web_icon="pragmatic_quickbooks_desktop_connector,static/description/log.png"/>
+        <menuitem id="menu_qbd_duplicate_loger" parent="menu_qbd_logger_re" name="Duplicate Records" action="action_qbd_duplicate_record" sequence="2"/>
+        <menuitem id="menu_qbd_orderinvoice_logger" parent="menu_qbd_logger_re" name="Order Invoice Records" action="action_qbd_orderinvoice_record" sequence="2"/>
+        <menuitem id="menu_qbd_import_export_logger" parent="menu_qbd_logger_re" name="Export Logs" action="action_qbd_import_export_record" sequence="3"/>
+        <menuitem id="menu_qbd_connection_logger" parent="menu_qbd_logger_re" name="Connection Log / Import Logs" action="action_qbd_connection_log" sequence="4"/>
+        <menuitem id="menu_qbd_linked_logger" parent="menu_qbd_logger_re" name="Import Logs"/>
+        <menuitem id="menu_qbd_import_linked_logger" parent="menu_qbd_linked_logger" name="Import Invoice Logs" action="action_qbd_linked_log" sequence="1"/>
+    </data>
+</odoo>

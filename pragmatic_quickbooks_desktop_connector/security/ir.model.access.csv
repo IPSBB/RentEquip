@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+access_qbd_loger,access_qbd_loger,model_qbd_loger,base.group_user,1,1,1,1
+access_qbd_tax_code,access_qbd_tax_code,model_qbd_tax_code,base.group_user,1,1,1,1
+access_qbd_duplicates_logger,access_qbd_duplicates_logger,model_qbd_duplicates_logger,base.group_user,1,1,1,1
+access_qbd_connection_logger,access_qbd_connection_logger,model_qbd_connection_logger,base.group_user,1,1,1,1
+access_qbd_orderinvoice_logger,access_qbd_orderinvoice_logger,model_qbd_orderinvoice_logger,base.group_user,1,1,1,1
+access_qbd_payment_method,ccess_qbd_payment_method,model_qbd_payment_method,base.group_user,1,1,1,1
+access_reponse_message_wizard,access_response_message_wizard,model_response_message_wizard,base.group_user,1,1,1,1
+
+access_qbd_linked_logger,access_qbd_linked_logger,model_qbd_linked_logger,base.group_user,1,1,1,1

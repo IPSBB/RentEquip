@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="qbd_payment_method_form" model="ir.ui.view">
+            <field name="name">qbd.tax.code.form</field>
+            <field name="model">qbd.tax.code</field>
+            <field name="arch" type="xml">
+                <form string="QBD Tax Code" name="QBD QBD Tax Code">
+                    <sheet>
+                        <group >
+                            <field name="name"/>
+                            <field name="is_taxable"/>
+                            <field name="quickbooks_id" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="qbd_payment_method_tree" model="ir.ui.view">
+            <field name="name">qbd.tax.code.tree</field>
+            <field name="model">qbd.tax.code</field>
+            <field name="arch" type="xml">
+                <tree string="QBD Tax Code" name="QBD Tax Code">
+                            <field name="name"/>
+                            <field name="is_taxable"/>
+                            <field name="quickbooks_id" readonly="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_qbd_tax_code_method" model="ir.actions.act_window">
+            <field name="name">QBD Tax Code</field>
+            <field name="res_model">qbd.tax.code</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_qbd_tax_code" name="QBD Tax Code" action="action_qbd_tax_code_method"
+                  parent="account.account_account_menu" sequence="2" />
+    </data>
+</odoo>
