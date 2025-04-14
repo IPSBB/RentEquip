@@ -3,40 +3,40 @@ import ast
 import json
 import requests
 
-class QBDPaymentMethod(models.Model):
-    _name = "qbd.payment.method"
-    _description = "QBD Payment Method"
-
-    name = fields.Char('Name')
-    quickbooks_id = fields.Char("Quickbook id ", copy=False)
-
-    def create_qbd_payment_methods(self,payment_methods_data):
-        print("\n\n")
-        if payment_methods_data:
-            for payment_method in payment_methods_data:
-                vals = {}
-
-                if type(payment_method)==str:
-                    continue
-
-                if 'payment_type' in payment_method and payment_method.get('payment_type'):
-                    qbd_payment_method_id = self.search([('name','=',payment_method.get('payment_type'))],limit=1)
-
-
-                    if not qbd_payment_method_id:
-                        vals.update({
-                            'name': payment_method.get('payment_type'),
-                            'quickbooks_id': payment_method.get('quickbooks_id')
-                        })
-
-                        if vals:
-                            self.create(vals)
-                    else:
-                        vals.update({
-                            'quickbooks_id': payment_method.get('quickbooks_id')
-                        })
-                        qbd_payment_method_id.write(vals)
-        return True
+# class QBDPaymentMethod(models.Model):
+#     _name = "qbd.payment.method"
+#     _description = "QBD Payment Method"
+#
+#     name = fields.Char('Name')
+#     quickbooks_id = fields.Char("Quickbook id ", copy=False)
+#
+#     def create_qbd_payment_methods(self,payment_methods_data):
+#         print("\n\n")
+#         if payment_methods_data:
+#             for payment_method in payment_methods_data:
+#                 vals = {}
+#
+#                 if type(payment_method)==str:
+#                     continue
+#
+#                 if 'payment_type' in payment_method and payment_method.get('payment_type'):
+#                     qbd_payment_method_id = self.search([('name','=',payment_method.get('payment_type'))],limit=1)
+#
+#
+#                     if not qbd_payment_method_id:
+#                         vals.update({
+#                             'name': payment_method.get('payment_type'),
+#                             'quickbooks_id': payment_method.get('quickbooks_id')
+#                         })
+#
+#                         if vals:
+#                             self.create(vals)
+#                     else:
+#                         vals.update({
+#                             'quickbooks_id': payment_method.get('quickbooks_id')
+#                         })
+#                         qbd_payment_method_id.write(vals)
+#         return True
     
 
     # @api.multi

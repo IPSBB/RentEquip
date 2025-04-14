@@ -10,6 +10,7 @@ sale_order = Blueprint('sale_order', __name__, template_folder='templates')
 '''
 TPA - Third Party Application
 '''
+
 @sale_order.route('/QBD/import_sales_order')
 def import_QBD_Sales_Order_to_TPA():
     try:

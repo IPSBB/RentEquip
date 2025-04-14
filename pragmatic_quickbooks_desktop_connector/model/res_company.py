@@ -86,6 +86,7 @@ class Qb_Config_Settings(models.Model):
     export_ven_limit = fields.Char('Export Vendors', default=50)
     export_pro_limit = fields.Char('Export Products', default=50)
     export_so_limit = fields.Char('Export Sales Orders', default=20)
+    export_pos_limit = fields.Char('Export POS Orders', default=20)
     export_inv_limit = fields.Char('Export Invoice', default=20)
     export_pay_limit = fields.Char('Export Payments', default=50)
     export_po_limit = fields.Char('Export Purchase Order', default=20)
@@ -94,6 +95,8 @@ class Qb_Config_Settings(models.Model):
     export_vendor_payment_limit = fields.Char('Export Vendor Payments', default=20)
 
     export_sales_order_date = fields.Char('Export Sales Order Date', default=False)
+    export_pos_order_date = fields.Datetime('Export Pos Order Date', default=False)
+    export_pos_order_end_date = fields.Datetime('Export Pos Order End Date', default=False)
     export_invoice_date = fields.Char('Export Invoice Date', default=False)
     export_payment_date = fields.Char('Export Payment Date', default=False)
     export_purchase_order_date = fields.Char('Export Purchase Date', default=False)
@@ -431,7 +434,7 @@ class Qb_Config_Settings(models.Model):
         for rec in tax_records:
             rec.write({'quickbooks_id': False})
 
-        payment_method_records = self.env['qbd.payment.method'].search([])
+        payment_method_records = self.env['pos.payment.method'].search([])
         for rec in payment_method_records:
             rec.write({'quickbooks_id': False})
 
@@ -836,7 +839,7 @@ class Qb_Config_Settings(models.Model):
         payment_method_data = ast.literal_eval(response.text)
         # print("ppppppppppppppppppppppppppp\n\nPayment Method data : ",payment_method_data)
         if payment_method_data:
-            is_imported = self.env['qbd.payment.method'].create_qbd_payment_methods(payment_method_data)
+            is_imported = self.env['pos.payment.method'].create_qbd_payment_methods(payment_method_data)
 
         # if is_imported:
         #     self.write({'last_imported_date_of_payment_methods': datetime.now()})
@@ -1406,22 +1409,24 @@ class Qb_Config_Settings(models.Model):
     def export_accounts(self):
         logger_obj = self.env['qbd.connection.logger']
 
-        try:
+        # try:
             #             print('\n\n!!!!!Export Accounts !!!!\n\n')
-            is_exported = False
+        is_exported = False
 
-            is_exported = self.env['account.account'].export_accounts()
+        is_exported = self.env['account.account'].export_accounts()
 
-            return self.sendMessage({'Message': "Data Exported Successful !!"})
-
-        except ConnectionError as ce:
-            logger_obj.create({'message': 'Connection Failed with the Host',
-                               'type': 'Exporting Accounts', 'date': datetime.now()})
-            return self.sendMessage({'Message': "Connection Failed with the Host !!"})
-        except Exception as e:
-            logger_obj.create(
-                {'message': e, 'type': 'Exporting Accounts', 'date': datetime.now()})
-            return self.sendMessage({'Message': e})
+        return self.sendMessage({'Message': "Data Exported Successful !!"})
+        #
+        # except ConnectionError as ce:
+        #     logger_obj.create({'message': 'Connection Failed with the Host',
+        #                        'type': 'Exporting Accounts', 'date': datetime.now()})
+        #     print("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppp")
+        #     return self.sendMessage({'Message': "Connection Failed with the Host !!"})
+        # except Exception as e:
+        #     logger_obj.create(
+        #         {'message': e, 'type': 'Exporting Accounts', 'date': datetime.now()})
+        #     print("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
+        #     return self.sendMessage({'Message': e})
 
     # @api.multi
     def export_partners(self):
@@ -1475,6 +1480,16 @@ class Qb_Config_Settings(models.Model):
         is_exported = self.env['sale.order'].export_sale_orders()
         _logger.info("IS Exported==>>>>>>>>>>{}".format(is_exported))
         return self.sendMessage({'Message': "Data Exported Successful !!"})
+
+
+    def export_pos_orders(self):
+        #         print('\n\n!!!!!Export Sale Orders !!!!\n\n')
+        is_exported = False
+
+        is_exported = self.env['pos.order'].export_pos_orders()
+        _logger.info("IS Exported==>>>>>>>>>>{}".format(is_exported))
+        return self.sendMessage({'Message': "Data Exported Successful !!"})
+
 
     # @api.multi
     def export_invoices(self):

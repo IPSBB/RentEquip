@@ -316,6 +316,7 @@ class AccountAccount(models.Model):
     #         return account_type
 
     def export_accounts(self):
+        print("in the export accounts ----")
         account_data_list = []
         loger_dict = {}
         loger_list = []
@@ -335,7 +336,7 @@ class AccountAccount(models.Model):
             else:
                 accounts = self.search([('quickbooks_id', '=', None)], limit=limit)
 
-        # print('\n\nAccountss :', accounts, '\n\n')
+        print('\n\nAccountss :', accounts, '\n\n')
 
         if accounts:
             for account in accounts:
@@ -350,6 +351,7 @@ class AccountAccount(models.Model):
                     account_data_list.append(account_dict)
 
         if account_data_list:
+            print('account_data_list:           ', account_data_list)
             # print('\n\nAccount data list : \n\n',account_data_list,'\n\n\n')
             # print('\n\n Total Count :: ',len(account_data_list))
 
@@ -358,6 +360,7 @@ class AccountAccount(models.Model):
             data = account_data_list
 
             data = {'account_list': data}
+            print('data:        ', data)
 
             response = requests.request('POST', company.url + '/export_accounts', data=json.dumps(data), headers=headers,
                                         verify=False)
@@ -401,19 +404,21 @@ class AccountAccount(models.Model):
                             # company.write({'qbd_loger_id': [(4, qbd_loger_id.id)]})
                 else:
                     raise UserError(_("No Data in Response Check Quickbook Desktop Terminal"))
-            except Exception as ex: 
+            except Exception as ex:
+                print("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")
                 _logger.error(str(ex))
                 raise UserError(str(ex))
         return True
 
     def get_account_dict(self, account, is_send_updated=False):
+        print("in the get_account_dicttttttttttttt")
         account_dict = {}
 
         # print ("---------------------", account.user_type_id.name)
         # print ("---------------------",self.getAccountType(account.user_type_id.name))
-
+        print("0000000000000000000000000000000000000000")
         bad_chars = [';', ':', '!', "*", "$", "'"]
-        name = account.name
+        name = account.name if account.name else ""  # Ensure name is always a string
         for i in bad_chars:
             name = name.replace(i, "")
 
@@ -448,11 +453,14 @@ class AccountAccount(models.Model):
             })
 
         if account_dict:
+            print('account_dict:        ', account_dict)
             return account_dict
 
     def getAccountType(self, AccountType):
+        """Convert Odoo account types to QuickBooks account types"""
+        if not AccountType:  # Handle None or False values
+            return ""
         qbAccountType = ''
-
         if AccountType == "asset_cash" or AccountType == "asset_cash":
             qbAccountType = "Bank"
 

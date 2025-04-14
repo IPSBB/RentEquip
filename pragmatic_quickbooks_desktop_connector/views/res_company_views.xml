@@ -12,7 +12,7 @@
             </xpath>
 
             <xpath expr="//notebook/page[1]" position="after">
-                <page string="QuickBooks Desktop Configuration">
+                <page string="QuickBooks Desktop Configuration" invisible="name != 'Fasteners Barbados Ltd.'">
                     <separator name="configuration" string="QuickBooks Desktop Configuration"/>
                     <div>
                         <span>
@@ -250,6 +250,7 @@
                                 <field name="export_ven_limit" class="inline"/>
                                 <field name="export_pro_limit" class="inline"/>
                                 <field name="export_so_limit" class="inline"/>
+                                <field name="export_pos_limit" class="inline"/>
                                 <field name="export_inv_limit" class="inline"/>
                                 <field name="export_pay_limit" class="inline"/>
                                 <field name="export_po_limit" class="inline"/>
@@ -299,6 +300,17 @@
                                 </group>
                                 <group>
                                     <field name="export_sales_order_date"/>
+                                </group>
+                            </group>
+
+                             <group>
+                                <group>
+                                    <button string="5-Export POS Orders" type="object" name="export_pos_orders"
+                                            class="oe_highlight" icon="fa-arrow-circle-down"/>
+                                </group>
+                                <group>
+                                    <field name="export_pos_order_date"/>
+                                    <field name="export_pos_order_end_date"/>
                                 </group>
                             </group>
 

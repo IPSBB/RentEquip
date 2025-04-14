@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pos_form" model="ir.ui.view">
+            <field name="name">pos.order.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <field name='fiscal_position_id' position="after">
+                    <field name="quickbooks_id" readonly="1"/>
+                    <field name="invoice_no" readonly="1"/>
+                    <field name="sale_no" readonly="1"/>
+                    <!--                    <field name="is_updated"/>-->
+                </field>
+                <!--                <field name="note" position="after">-->
+                <!--                        <field name="qbd_memo" class="oe_inline" placeholder="QBD Memo"/>-->
+                <!--                </field>-->
+
+                <!-- <field name="tax_id" position="after">
+                    <field name="qbd_tax_code" placeholder="Tax Code" string="QBD Tax Code"
+                           attrs="{'required':[('display_type', '=', False)]}" readonly="1" force_save="1"/>
+                </field> -->
+
+                <!-- <xpath expr="//tree/field[@name='tax_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('display_type', '=', False)]}</attribute>
+                </xpath> -->
+
+                <xpath expr="//field[@name='lines']/tree//field[@name='tax_ids_after_fiscal_position']"
+                       position="after">
+                    <field name="qbd_tax_code" placeholder="Tax Code" string="QBD Tax Code"
+                           readonly="" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

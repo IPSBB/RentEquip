@@ -181,17 +181,19 @@ class Product(models.Model):
                 print('\n\nResp : ', resp, '\n')
                 if isinstance(resp, dict):
                     if company.export_updated_record == False:
-
+                        print("in the iffffffffffffffffffffffffffffffffffffffffffffffffff")
                         if resp.get('Message'):
                             raise UserError(_("No Product was Exported"))
 
                         for res in resp.get('Data'):
                             if 'odoo_id' in res and res.get('odoo_id'):
                                 product_id = self.browse(int(res.get('odoo_id')))
+                                print('product_id:      ', product_id)
 
                                 if product_id:
                                     if res.get('quickbooks_id'):
                                         product_id.write({'quickbooks_id': res.get('quickbooks_id')})
+                                        print(product_id.write({'quickbooks_id': res.get('quickbooks_id')}), "uuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
                             loger_dict.update({'operation': 'Export Product',
                                                'odoo_id': res.get('odoo_id'),
                                                'qbd_id': res.get('quickbooks_id'),
@@ -201,6 +203,7 @@ class Product(models.Model):
                             # company.write({'qbd_loger_id': [(4, qbd_loger_id.id)]})
 
                     else:
+                        print("in the elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
                         if resp.get('Message'):
                             raise UserError(_("No Product was Exported"))
                         for res in resp.get('Data'):
